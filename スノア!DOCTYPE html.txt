@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社スノア | Sunoar Inc.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            line-height: 1.8;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 24px 0;
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 16px 0;
+            box-shadow: 0 4px 30px rgba(0, 123, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #007bff;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-sub {
+            font-size: 13px;
+            color: #666;
+            margin-left: 12px;
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #007bff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0066ff 0%, #007bff 50%, #00a3ff 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            animation: float-circle 20s infinite ease-in-out;
+        }
+
+        .circle1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle2 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .circle3 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float-circle {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            line-height: 1.3;
+            margin-bottom: 40px;
+            font-weight: 700;
+            animation: slideUp 1s ease;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 2;
+            opacity: 0.95;
+            animation: slideUp 1s ease 0.3s backwards;
+            font-weight: 400;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            padding: 120px 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #00a3ff);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 17px;
+            color: #666;
+            margin-bottom: 80px;
+            margin-top: 30px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services {
+            background: #f8fbff;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 123, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #00a3ff);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(0, 123, 255, 0.15);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #007bff, #00a3ff);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #555;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+
+        .strength-item {
+            padding: 50px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 30px rgba(0, 123, 255, 0.06);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .strength-item:hover {
+            border-color: #007bff;
+            box-shadow: 0 10px 50px rgba(0, 123, 255, 0.12);
+            transform: translateX(10px);
+        }
+
+        .strength-item h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #007bff;
+            font-weight: 700;
+        }
+
+        .strength-item p {
+            color: #555;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .vision {
+            background: linear-gradient(135deg, #0066ff 0%, #007bff 50%, #00a3ff 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.3;
+            }
+        }
+
+        .vision .section-title,
+        .vision .section-subtitle {
+            color: white;
+        }
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .vision-item {
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .vision-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .vision-item h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .vision-item p {
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .company-info {
+            background: #f8fbff;
+        }
+
+        .info-table {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 50px rgba(0, 123, 255, 0.1);
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            border-bottom: 1px solid #e8f2ff;
+            transition: background 0.3s ease;
+        }
+
+        .info-row:hover {
+            background: #f8fbff;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            padding: 32px 40px;
+            background: #f8fbff;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .info-value {
+            padding: 32px 40px;
+            color: #1a1a1a;
+        }
+
+        footer {
+            background: #001a33;
+            color: white;
+            padding: 80px 60px 40px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #00a3ff;
+        }
+
+        .footer-info {
+            margin-bottom: 40px;
+            color: #aaa;
+            line-height: 2;
+            font-size: 15px;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid #003366;
+            color: #777;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .service-grid,
+            .strengths-grid,
+            .vision-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-row {
+                grid-template-columns: 1fr;
+            }
+
+            .info-label {
+                border-bottom: 1px solid #e8f2ff;
+            }
+
+            nav {
+                padding: 0 30px;
+            }
+
+            .nav-links {
+                gap: 25px;
+                font-size: 13px;
+            }
+
+            section {
+                padding: 80px 30px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <div class="logo">
+                Sunoar
+                <span class="logo-sub">株式会社スノア</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">事業内容</a></li>
+                <li><a href="#strengths">技術力</a></li>
+                <li><a href="#vision">ビジョン</a></li>
+                <li><a href="#company">会社情報</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="circle circle1"></div>
+            <div class="circle circle2"></div>
+            <div class="circle circle3"></div>
+        </div>
+        <div class="hero-content">
+            <h1>テクノロジーで、<br>未来のビジネスを創造する</h1>
+            <p>
+                最先端のIT技術を駆使し、企業の課題解決と成長を支援します<br>
+                クラウド、データ分析、インフラ構築を通じて<br>
+                持続可能で革新的なビジネス環境の実現をサポートします
+            </p>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">事業内容</h2>
+            <p class="section-subtitle">お客様のビジネス課題に最適なソリューションを提供します</p>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>ITソリューション事業</h3>
+                    <p>企業の業務効率化や課題解決のための最適なITソリューションを提供。顧客のニーズに合わせたシステム開発からクラウド活用まで幅広く対応します。</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>テクノロジーコンサルティング事業</h3>
+                    <p>最新のテクノロジートレンドを踏まえ、企業のDX推進や技術選定をサポート。データ分析に基づく戦略立案と効果測定により、ビジネス成長を加速します。</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>ITインフラ構築及び運用保守事業</h3>
+                    <p>安定的かつセキュアなITインフラの設計から構築、運用保守まで一貫したサービスを提供。クラウド環境の構築からオンプレミスシステムの管理まで対応します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="strengths">
+        <div class="container">
+            <h2 class="section-title">技術力と革新性</h2>
+            <p class="section-subtitle">確かな技術力で、お客様のビジネスを支えます</p>
+            
+            <div class="strengths-grid">
+                <div class="strength-item">
+                    <h3>最新のIT技術活用</h3>
+                    <p>クラウド、AI、ビッグデータなど最新技術を駆使したソリューションを提供。お客様のビジネス課題を最適な技術で解決し、業務効率化と価値創造を実現します。</p>
+                </div>
+                
+                <div class="strength-item">
+                    <h3>インフラ構築の専門性</h3>
+                    <p>オンプレミスからクラウドまで幅広い環境に対応。高可用性と拡張性を備えた堅牢なインフラ設計と構築で、ビジネスの安定稼働を支えます。</p>
+                </div>
+                
+                <div class="strength-item">
+                    <h3>セキュリティ強化・DX推進</h3>
+                    <p>多層防御の考え方に基づいた高度なセキュリティ対策とデジタルトランスフォーメーションの両立で、安全かつ革新的なビジネス環境を構築します。</p>
+                </div>
+                
+                <div class="strength-item">
+                    <h3>継続的な技術研鑽</h3>
+                    <p>最新技術動向の調査・研究と積極的な資格取得支援により、常に先進的なソリューション提供が可能な技術力を維持・向上させています。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="vision">
+        <div class="container">
+            <h2 class="section-title">今後のビジョンと展望</h2>
+            <p class="section-subtitle">未来を見据えた価値創造</p>
+            
+            <div class="vision-grid">
+                <div class="vision-item">
+                    <h3>IT技術の進化への対応</h3>
+                    <p>最新のIT技術を積極的に取り入れ、顧客企業の競争力向上に貢献します。クラウド技術やAI活用を通じて、革新的なソリューションを提供します。</p>
+                </div>
+                
+                <div class="vision-item">
+                    <h3>顧客企業の成長支援</h3>
+                    <p>ビジネスプロセスの効率化と業務品質の向上を通じて、顧客企業の持続的な成長を支援します。専門的な知見と経験を活かしたコンサルティングを提供します。</p>
+                </div>
+                
+                <div class="vision-item">
+                    <h3>社会のデジタル化貢献</h3>
+                    <p>社会全体のデジタルトランスフォーメーションを推進し、効率的で持続可能な社会づくりに貢献します。多様な業界のIT課題解決を通じて社会的価値を創出します。</p>
+                </div>
+                
+                <div class="vision-item">
+                    <h3>持続可能な企業づくり</h3>
+                    <p>高い技術力と倫理観を持つ人材の育成に努め、社会から信頼される企業を目指します。長期的な視点でステークホルダーとの関係構築に取り組みます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="company" class="company-info">
+        <div class="container">
+            <h2 class="section-title">会社情報</h2>
+            <p class="section-subtitle">Company Information</p>
+            
+            <div class="info-table">
+                <div class="info-row">
+                    <div class="info-label">会社名</div>
+                    <div class="info-value">株式会社スノア / Sunoar Inc.</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">代表者</div>
+                    <div class="info-value">徳重 裕太</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">設立</div>
+                    <div class="info-value">令和7年8月19日</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">資本金</div>
+                    <div class="info-value">200万円</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">事業形態</div>
+                    <div class="info-value">株式会社</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">所在地</div>
+                    <div class="info-value">東京都千代田区神田淡路町二丁目1番地-401号</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Sunoar</div>
+            <div class="footer-info">
+                株式会社スノア<br>
+                東京都千代田区神田淡路町二丁目1番地-401号
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Sunoar Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
