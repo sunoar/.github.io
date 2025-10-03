@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社スノア | Sunoar Inc.</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          'Noto Sans JP',
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ヘッダー */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        z-index: 1000;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(0, 102, 255, 0.02) 0%, rgba(0, 163, 255, 0.01) 50%, rgba(0, 102, 255, 0.02) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      
+      header.scrolled {
+        padding: 12px 0;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+        transform: translateY(0);
+        animation: headerGlow 2s ease-in-out;
+      }
+      
+      header.scrolled::before {
+        opacity: 1;
+      }
+      
+      @keyframes headerGlow {
+        0% { box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15); }
+        50% { box-shadow: 0 12px 40px rgba(0, 123, 255, 0.2); }
+        100% { box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15); }
+      }
+
+      nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: 700;
+        color: #0066ff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      
+      .logo:hover {
+        transform: scale(1.05);
+        color: #0056b3;
+      }
+
+      .logo-sub {
+        font-size: 12px;
+        color: #666;
+        margin-left: 8px;
+        font-weight: 400;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        list-style: none;
+        margin: 0;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 16px;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #0066ff, #007bff);
+        transition: width 0.3s ease;
+      }
+      
+      .nav-links a:hover {
+        color: #0066ff;
+        background: rgba(0, 102, 255, 0.05);
+      }
+      
+      .nav-links a:hover::after {
+        width: calc(100% - 32px);
+      }
+
+      /* メインビジュアル */
+      .hero {
+        background: 
+          linear-gradient(135deg, rgba(0, 102, 255, 0.85) 0%, rgba(0, 123, 255, 0.75) 50%, rgba(0, 163, 255, 0.85) 100%),
+          url('https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/a08a7add-bb1a-4b09-a392-6e57a2f33b53') center/cover no-repeat;
+        color: white;
+        text-align: center;
+        padding: 180px 40px 150px;
+        margin-top: 80px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background-attachment: fixed;
+      }
+      
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          radial-gradient(circle at 20% 30%, rgba(0, 163, 255, 0.15) 0%, transparent 60%),
+          radial-gradient(circle at 80% 70%, rgba(0, 102, 255, 0.12) 0%, transparent 50%),
+          radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+        animation: heroOverlayPulse 8s ease-in-out infinite;
+        z-index: 1;
+      }
+      
+      .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.03) 25%, transparent 50%, rgba(0, 163, 255, 0.05) 75%, transparent 100%);
+        animation: heroSweep 12s linear infinite;
+        z-index: 1;
+      }
+      
+      @keyframes heroOverlayPulse {
+        0%, 100% { 
+          opacity: 0.6;
+          transform: scale(1) rotate(0deg);
+        }
+        33% { 
+          opacity: 0.8;
+          transform: scale(1.02) rotate(0.5deg);
+        }
+        66% { 
+          opacity: 0.4;
+          transform: scale(0.98) rotate(-0.3deg);
+        }
+      }
+      
+      @keyframes heroSweep {
+        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+      }
+
+      .hero-content {
+        max-width: 1100px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 3;
+        backdrop-filter: blur(2px);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 60px 40px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* CTAボタン */
+      .hero-cta {
+        margin-top: 50px;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 4;
+      }
+      
+      .cta-button {
+        display: inline-block;
+        padding: 18px 40px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: slideUpStagger 1.2s ease 0.8s backwards, ctaButtonPulse 4s ease-in-out 2s infinite;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s ease;
+      }
+      
+      .cta-button:hover::before {
+        left: 100%;
+      }
+      
+      .cta-button:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+      
+      .cta-button.primary {
+        background: rgba(255, 255, 255, 0.9);
+        color: #0066ff;
+        border-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+      }
+      
+      .cta-button.primary:hover {
+        background: white;
+        color: #0056b3;
+        transform: translateY(-5px) scale(1.08);
+        box-shadow: 0 20px 50px rgba(255, 255, 255, 0.3);
+      }
+      
+      @keyframes ctaButtonPulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3); }
+        50% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+      }
+
+      .hero h1 {
+        font-size: 72px;
+        line-height: 1.2;
+        margin-bottom: 40px;
+        font-weight: 900;
+        letter-spacing: -3px;
+        color: white;
+        animation: slideUpStagger 1.2s ease 0.2s backwards, heroTitleFloat 6s ease-in-out 2s infinite;
+        position: relative;
+        z-index: 4;
+        text-shadow: 
+          0 2px 4px rgba(0, 0, 0, 0.5),
+          0 4px 20px rgba(0, 102, 255, 0.4),
+          0 0 60px rgba(255, 255, 255, 0.2);
+      }
+      
+      .hero h1::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        animation: heroTitleSweep 3s ease-in-out 1.5s infinite;
+        z-index: -1;
+      }
+      
+      @keyframes slideUpStagger {
+        from {
+          opacity: 0;
+          transform: translateY(50px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      @keyframes heroTitleFloat {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        25% { transform: translateY(-5px) rotate(0.3deg); }
+        50% { transform: translateY(-2px) rotate(0deg); }
+        75% { transform: translateY(-8px) rotate(-0.3deg); }
+      }
+      
+      @keyframes heroTitleSweep {
+        0% { transform: translateX(-100%); }
+        50% { transform: translateX(100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      .hero p {
+        font-size: 24px;
+        line-height: 1.8;
+        opacity: 0.95;
+        font-weight: 400;
+        color: white;
+        animation: slideUpStagger 1.2s ease 0.5s backwards, heroTextFloat 8s ease-in-out 3s infinite;
+        position: relative;
+        z-index: 4;
+        margin-bottom: 50px;
+        text-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.4),
+          0 4px 16px rgba(0, 102, 255, 0.3);
+        backdrop-filter: blur(1px);
+      }
+      
+      @keyframes heroTextFloat {
+        0%, 100% { transform: translateY(0px); opacity: 0.95; }
+        50% { transform: translateY(-3px); opacity: 1; }
+      }
+
+      /* セクション共通 */
+      section {
+        padding: 80px 40px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: #333;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 64px;
+      }
+
+      /* 事業内容 */
+      .services {
+        background: #f8fbff;
+      }
+
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 32px;
+      }
+
+      .service-card {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        border: 1px solid #e8f2ff;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        animation: serviceCardFloat 8s ease-in-out infinite;
+      }
+      
+      .service-card:nth-child(1) { animation-delay: 0s; }
+      .service-card:nth-child(2) { animation-delay: 2s; }
+      .service-card:nth-child(3) { animation-delay: 4s; }
+      
+      @keyframes serviceCardFloat {
+        0%, 100% { 
+          transform: translateY(0px) rotate(0deg);
+          box-shadow: 0 8px 25px rgba(0, 102, 255, 0.08);
+        }
+        50% { 
+          transform: translateY(-5px) rotate(0.5deg);
+          box-shadow: 0 15px 40px rgba(0, 102, 255, 0.12);
+        }
+      }
+      
+      .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #0066ff, #007bff, #00a3ff);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.6s ease;
+      }
+      
+      .service-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0, 102, 255, 0.05) 0%, rgba(0, 123, 255, 0.02) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      
+      .service-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 80px rgba(0, 102, 255, 0.2);
+        border-color: rgba(0, 102, 255, 0.3);
+      }
+      
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+      
+      .service-card:hover::after {
+        opacity: 1;
+      }
+
+      .service-card h3 {
+        font-size: 20px;
+        margin-bottom: 16px;
+        color: #333;
+        font-weight: 600;
+      }
+
+      .service-card p {
+        color: #555;
+        line-height: 1.7;
+        font-size: 14px;
+      }
+
+      /* 技術力 */
+      .strengths-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      .strength-item {
+        padding: 40px;
+        background: white;
+        border-radius: 16px;
+        border: 1px solid #f0f0f0;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        animation: strengthItemBreathe 10s ease-in-out infinite;
+      }
+      
+      .strength-item:nth-child(1) { animation-delay: 0s; }
+      .strength-item:nth-child(2) { animation-delay: 2.5s; }
+      .strength-item:nth-child(3) { animation-delay: 5s; }
+      .strength-item:nth-child(4) { animation-delay: 7.5s; }
+      
+      @keyframes strengthItemBreathe {
+        0%, 100% { 
+          transform: scale(1);
+          box-shadow: 0 5px 15px rgba(0, 102, 255, 0.05);
+        }
+        50% { 
+          transform: scale(1.01);
+          box-shadow: 0 8px 25px rgba(0, 102, 255, 0.08);
+        }
+      }
+      
+      .strength-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0, 102, 255, 0.03) 0%, rgba(0, 163, 255, 0.01) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      
+      .strength-item:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 20px 60px rgba(0, 102, 255, 0.15);
+        border-color: rgba(0, 102, 255, 0.2);
+      }
+      
+      .strength-item:hover::before {
+        opacity: 1;
+      }
+
+      .strength-item h3 {
+        font-size: 18px;
+        margin-bottom: 16px;
+        color: #0066ff;
+        font-weight: 600;
+      }
+
+      .strength-item p {
+        color: #555;
+        line-height: 1.7;
+        font-size: 14px;
+      }
+
+      /* ビジョン */
+      .vision {
+        background: linear-gradient(135deg, #0066ff 0%, #007bff 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .vision::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="visionGrid" width="15" height="15" patternUnits="userSpaceOnUse"><path d="M 15 0 L 0 0 0 15" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23visionGrid)"/></svg>');
+        animation: visionDrift 40s linear infinite;
+        opacity: 0.6;
+      }
+      
+      @keyframes visionDrift {
+        0% { transform: translateX(0) translateY(0) rotate(0deg); }
+        100% { transform: translateX(-50px) translateY(-50px) rotate(5deg); }
+      }
+
+      .vision .section-title,
+      .vision .section-subtitle {
+        color: white;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .vision .section-title {
+        font-size: 42px;
+        margin-bottom: 20px;
+        animation: visionTitlePulse 3s ease-in-out infinite;
+      }
+      
+      @keyframes visionTitlePulse {
+        0%, 100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+        50% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.2); }
+      }
+      
+      .vision .section-subtitle {
+        font-size: 18px;
+        margin-bottom: 80px;
+      }
+
+      .vision-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .vision-item {
+        padding: 50px 40px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        animation: visionItemFloat 6s ease-in-out infinite;
+      }
+      
+      .vision-item:nth-child(1) { animation-delay: 0s; }
+      .vision-item:nth-child(2) { animation-delay: 1.5s; }
+      .vision-item:nth-child(3) { animation-delay: 3s; }
+      .vision-item:nth-child(4) { animation-delay: 4.5s; }
+      
+      @keyframes visionItemFloat {
+        0%, 100% { 
+          transform: translateY(0px) rotate(0deg);
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        25% { 
+          transform: translateY(-8px) rotate(0.5deg);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        50% { 
+          transform: translateY(-4px) rotate(0deg);
+          box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+        }
+        75% { 
+          transform: translateY(-12px) rotate(-0.5deg);
+          box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        }
+      }
+      
+      .vision-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.8s ease;
+      }
+      
+      .vision-item:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.05) translateY(-10px);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+      
+      .vision-item:hover::before {
+        left: 100%;
+      }
+
+      .vision-item h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        color: white;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        animation: visionTextGlow 4s ease-in-out infinite;
+      }
+      
+      @keyframes visionTextGlow {
+        0%, 100% { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
+        50% { text-shadow: 0 2px 20px rgba(255, 255, 255, 0.4), 0 2px 10px rgba(0, 0, 0, 0.3); }
+      }
+
+      .vision-item p {
+        line-height: 1.8;
+        font-size: 16px;
+        color: white;
+        position: relative;
+        z-index: 2;
+        opacity: 0.95;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+      }
+      
+      /* 浮遊する装飾要素 */
+      .vision-decoration {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        animation: visionFloat 8s infinite ease-in-out;
+      }
+      
+      .vision-decoration:nth-child(1) {
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 6s;
+      }
+      
+      .vision-decoration:nth-child(2) {
+        top: 60%;
+        right: 15%;
+        animation-delay: 2s;
+        animation-duration: 8s;
+      }
+      
+      .vision-decoration:nth-child(3) {
+        bottom: 30%;
+        left: 20%;
+        animation-delay: 4s;
+        animation-duration: 7s;
+      }
+      
+      @keyframes visionFloat {
+        0%, 100% {
+          transform: translateY(0px) translateX(0px) rotate(0deg);
+          opacity: 0.4;
+        }
+        25% {
+          transform: translateY(-20px) translateX(10px) rotate(90deg);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateY(-10px) translateX(20px) rotate(180deg);
+          opacity: 0.6;
+        }
+        75% {
+          transform: translateY(-30px) translateX(5px) rotate(270deg);
+          opacity: 0.9;
+        }
+      }
+
+      /* 採用情報 */
+      .recruitment {
+        background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+      }
+      
+      .recruitment-intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 80px;
+      }
+      
+      .recruitment-intro h3 {
+        font-size: 28px;
+        color: #0066ff;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+      
+      .recruitment-intro p {
+        font-size: 18px;
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 40px;
+      }
+      
+      .recruitment-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+      
+      .stat-card {
+        background: white;
+        padding: 30px 20px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0, 102, 255, 0.08);
+        transition: all 0.3s ease;
+      }
+      
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 102, 255, 0.15);
+      }
+      
+      .stat-number {
+        font-size: 36px;
+        font-weight: 900;
+        color: #0066ff;
+        display: block;
+        margin-bottom: 8px;
+      }
+      
+      .stat-label {
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+      }
+      
+      .job-positions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+      
+      .job-card {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 102, 255, 0.08);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        animation: jobCardGentle 12s ease-in-out infinite;
+      }
+      
+      .job-card:nth-child(odd) { animation-delay: 0s; }
+      .job-card:nth-child(even) { animation-delay: 6s; }
+      
+      @keyframes jobCardGentle {
+        0%, 100% { 
+          transform: translateY(0px);
+          box-shadow: 0 10px 40px rgba(0, 102, 255, 0.08);
+        }
+        50% { 
+          transform: translateY(-3px);
+          box-shadow: 0 15px 50px rgba(0, 102, 255, 0.12);
+        }
+      }
+      
+      .job-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #0066ff, #007bff, #00a3ff);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.6s ease;
+      }
+      
+      .job-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, #0066ff, #007bff);
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.6s ease 0.2s;
+      }
+      
+      .job-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 80px rgba(0, 102, 255, 0.2);
+        border: 1px solid rgba(0, 102, 255, 0.1);
+      }
+      
+      .job-card:hover::before {
+        transform: scaleX(1);
+      }
+      
+      .job-card:hover::after {
+        transform: scaleY(1);
+      }
+      
+      .job-title {
+        font-size: 24px;
+        color: #0066ff;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      
+      .job-summary {
+        color: #666;
+        margin-bottom: 25px;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+      
+      .job-requirements {
+        margin-bottom: 25px;
+      }
+      
+      .job-requirements h4 {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+      
+      .job-requirements ul {
+        list-style: none;
+        padding: 0;
+      }
+      
+      .job-requirements li {
+        padding: 5px 0;
+        color: #555;
+        font-size: 14px;
+        position: relative;
+        padding-left: 20px;
+      }
+      
+      .job-requirements li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #0066ff;
+        font-weight: bold;
+      }
+      
+      .job-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 25px;
+      }
+      
+      .skill-tag {
+        background: linear-gradient(135deg, #e8f2ff, #f0f8ff);
+        color: #0066ff;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        border: 1px solid rgba(0, 102, 255, 0.2);
+      }
+      
+      .apply-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #0066ff, #007bff);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      
+      .apply-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
+        color: white;
+      }
+      
+      .benefits-section {
+        background: white;
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 102, 255, 0.08);
+        margin-bottom: 40px;
+      }
+      
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+      
+      .benefit-item {
+        text-align: center;
+        padding: 20px;
+      }
+      
+      .benefit-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+        display: block;
+      }
+      
+      .benefit-item h4 {
+        font-size: 18px;
+        color: #0066ff;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+      
+      .benefit-item p {
+        color: #666;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      /* 会社情報 */
+      .company-info {
+        background: #f8fbff;
+      }
+
+      .info-table {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 50px rgba(0, 102, 255, 0.08);
+        border: 1px solid #e8f2ff;
+      }
+
+      .info-row {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background 0.3s ease;
+      }
+      
+      .info-row:hover {
+        background: #f8fbff;
+      }
+
+      .info-row:last-child {
+        border-bottom: none;
+      }
+
+      .info-label {
+        padding: 24px;
+        background: #f8fbff;
+        font-weight: 600;
+        color: #0066ff;
+        font-size: 14px;
+      }
+
+      .info-value {
+        padding: 24px;
+        color: #333;
+        font-size: 14px;
+      }
+
+      /* お問い合わせ */
+      .contact-info {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .contact-info h3 {
+        font-size: 18px;
+        color: #0066ff;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .contact-info p {
+        color: #555;
+        line-height: 1.7;
+        margin-bottom: 24px;
+      }
+
+      /* フッター */
+      footer {
+        background: #333;
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .footer-logo {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: #00a3ff;
+      }
+
+      .footer-info {
+        margin-bottom: 24px;
+        color: #ccc;
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      .footer-bottom {
+        color: #999;
+        font-size: 12px;
+      }
+
+      /* フェードインアニメーション */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .fade-in.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* パーティクルアニメーション */
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+      
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        animation: particleFloat 8s infinite ease-in-out;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 70%, transparent 100%);
+      }
+      
+      .particle:nth-child(odd) {
+        width: 6px;
+        height: 6px;
+        animation-duration: 6s;
+      }
+      
+      .particle:nth-child(even) {
+        width: 4px;
+        height: 4px;
+        animation-duration: 8s;
+      }
+      
+      .particle:nth-child(3n) {
+        width: 8px;
+        height: 8px;
+        animation-duration: 10s;
+        background: radial-gradient(circle, rgba(0, 163, 255, 0.6) 0%, rgba(0, 163, 255, 0.2) 70%, transparent 100%);
+      }
+      
+      @keyframes particleFloat {
+        0%, 100% {
+          transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+          opacity: 0.8;
+        }
+        25% {
+          transform: translateY(-30px) translateX(20px) rotate(90deg) scale(1.2);
+          opacity: 1;
+        }
+        50% {
+          transform: translateY(-15px) translateX(-15px) rotate(180deg) scale(0.8);
+          opacity: 0.6;
+        }
+        75% {
+          transform: translateY(-40px) translateX(30px) rotate(270deg) scale(1.4);
+          opacity: 0.9;
+        }
+      }
+      
+      /* ヒーローオーブ */
+      .hero-orbs {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        overflow: hidden;
+      }
+      
+      .hero-orb {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(0, 163, 255, 0.1), transparent);
+        filter: blur(1px);
+        animation: orbFloat 20s ease-in-out infinite;
+      }
+      
+      .hero-orb-1 {
+        width: 400px;
+        height: 400px;
+        top: 5%;
+        left: 5%;
+        animation-delay: 0s;
+        animation-duration: 25s;
+        background: radial-gradient(circle at 30% 30%, rgba(0, 163, 255, 0.15), rgba(0, 102, 255, 0.08), transparent);
+      }
+      
+      .hero-orb-2 {
+        width: 300px;
+        height: 300px;
+        top: 50%;
+        right: 10%;
+        animation-delay: 8s;
+        animation-duration: 30s;
+        background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.12), rgba(0, 163, 255, 0.06), transparent);
+      }
+      
+      .hero-orb-3 {
+        width: 250px;
+        height: 250px;
+        bottom: 15%;
+        left: 55%;
+        animation-delay: 15s;
+        animation-duration: 20s;
+        background: radial-gradient(circle at 50% 50%, rgba(0, 123, 255, 0.1), rgba(255, 255, 255, 0.05), transparent);
+      }
+      
+      @keyframes orbFloat {
+        0%, 100% {
+          transform: translateX(0px) translateY(0px) scale(1);
+          opacity: 0.4;
+        }
+        25% {
+          transform: translateX(50px) translateY(-30px) scale(1.1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: translateX(-30px) translateY(-60px) scale(0.9);
+          opacity: 0.3;
+        }
+        75% {
+          transform: translateX(70px) translateY(-20px) scale(1.2);
+          opacity: 0.7;
+        }
+      }
+      
+      /* セクションタイトルアニメーション */
+      .section-title {
+        position: relative;
+        display: block;
+        text-align: center;
+      }
+      
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #0066ff, #007bff);
+        border-radius: 2px;
+        opacity: 0;
+        animation: slideIn 0.8s ease 0.5s forwards;
+      }
+      
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          width: 0;
+        }
+        to {
+          opacity: 1;
+          width: 60px;
+        }
+      }
+      
+      /* ホバーエフェクト強化 */
+      .service-card h3,
+      .strength-item h3 {
+        transition: color 0.3s ease;
+      }
+      
+      .service-card:hover h3 {
+        color: #0066ff;
+      }
+      
+      .service-card img {
+        transition: transform 0.4s ease;
+      }
+      
+      .service-card:hover img {
+        transform: scale(1.05);
+      }
+      
+      /* スクロールインジケーター */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        animation: scrollPulse 3s infinite ease-in-out;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px 20px;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      .scroll-indicator::before {
+        content: '';
+        display: block;
+        width: 28px;
+        height: 28px;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        border-top: none;
+        border-left: none;
+        transform: rotate(45deg);
+        margin: 0 auto 12px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+      
+      .scroll-indicator::after {
+        content: 'SCROLL DOWN';
+        display: block;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-align: center;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+      
+      .scroll-indicator:hover::before {
+        border-color: white;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+        transform: rotate(45deg) scale(1.1);
+      }
+      
+      .scroll-indicator:hover::after {
+        color: white;
+      }
+      
+      @keyframes scrollPulse {
+        0%, 100% {
+          transform: translateX(-50%) translateY(0px);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateX(-50%) translateY(-15px);
+          opacity: 1;
+        }
+      }
+
+      /* スムーズスクロール */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* レスポンシブ */
+      @media (max-width: 768px) {
+        .hero {
+          padding: 120px 20px 100px;
+          min-height: 90vh;
+        }
+        
+        .hero h1 {
+          font-size: 42px;
+          letter-spacing: -2px;
+        }
+
+        .hero p {
+          font-size: 18px;
+          margin-bottom: 40px;
+        }
+        
+        .hero-cta {
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .cta-button {
+          width: 280px;
+          text-align: center;
+        }
+
+        .service-grid,
+        .strengths-grid,
+        .vision-grid,
+        .job-positions,
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .recruitment-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .info-row {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          gap: 16px;
+          font-size: 12px;
+        }
+
+        section {
+          padding: 60px 20px;
+        }
+
+        .section-title {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body style="">
+    <script>
+      // パーティクルアニメーション
+      function createParticles() {
+        const particleContainer = document.getElementById('particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.animationDelay = Math.random() * 6 + 's';
+          particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+          particleContainer.appendChild(particle);
+        }
+      }
+      
+      // スクロールエフェクト
+      window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        
+        // フェードインアニメーション
+        const elements = document.querySelectorAll('.fade-in');
+        elements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('active');
+          }
+        });
+      });
+      
+      // ページ読み込み時の初期化
+      window.addEventListener('DOMContentLoaded', function() {
+        createParticles();
+        
+        // 初回スクロールチェック
+        const elements = document.querySelectorAll('.fade-in');
+        elements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('active');
+          }
+        });
+      });
+    </script>
+    <header class="scrolled">
+      <nav>
+        <a href="#" class="logo">
+          <span style="font-size: 44px;">Sunoar</span>
+          <span style="font-size: 14px; color: rgb(77, 77, 77);">株式会社スノア</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#top">TOP</a></li>
+          <li><a href="#services">事業内容</a></li>
+          <li><a href="#strengths">技術力</a></li>
+          <li><a href="#vision">ビジョン</a></li>
+          <li><a href="#recruitment">採用情報</a></li>
+          <li><a href="#company">会社情報</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="top" class="hero">
+      <div class="particles" id="particles"><div class="particle" style="left: 22.8416%; top: 69.0362%; animation-delay: 4.56577s; animation-duration: 4.77721s;"></div><div class="particle" style="left: 69.6964%; top: 58.8953%; animation-delay: 5.37055s; animation-duration: 3.30211s;"></div><div class="particle" style="left: 27.6777%; top: 27.4587%; animation-delay: 4.14099s; animation-duration: 4.79874s;"></div><div class="particle" style="left: 25.8126%; top: 94.7306%; animation-delay: 2.08019s; animation-duration: 5.14487s;"></div><div class="particle" style="left: 32.9349%; top: 76.6744%; animation-delay: 4.95565s; animation-duration: 3.15016s;"></div><div class="particle" style="left: 29.3262%; top: 81.7554%; animation-delay: 1.5902s; animation-duration: 5.30075s;"></div><div class="particle" style="left: 8.55251%; top: 23.8135%; animation-delay: 0.308645s; animation-duration: 4.77639s;"></div><div class="particle" style="left: 23.2249%; top: 43.4454%; animation-delay: 0.910525s; animation-duration: 5.38379s;"></div><div class="particle" style="left: 11.0666%; top: 81.4043%; animation-delay: 3.39989s; animation-duration: 4.53439s;"></div><div class="particle" style="left: 13.3536%; top: 57.0451%; animation-delay: 3.33491s; animation-duration: 5.39634s;"></div><div class="particle" style="left: 95.9661%; top: 58.1608%; animation-delay: 4.26784s; animation-duration: 3.17886s;"></div><div class="particle" style="left: 3.81381%; top: 43.6082%; animation-delay: 5.09962s; animation-duration: 4.45602s;"></div><div class="particle" style="left: 66.9568%; top: 71.5356%; animation-delay: 5.27607s; animation-duration: 5.66817s;"></div><div class="particle" style="left: 94.78%; top: 42.4794%; animation-delay: 2.48294s; animation-duration: 4.7281s;"></div><div class="particle" style="left: 20.6155%; top: 46.3091%; animation-delay: 2.7677s; animation-duration: 4.68693s;"></div><div class="particle" style="left: 4.39714%; top: 89.7242%; animation-delay: 0.834891s; animation-duration: 3.32082s;"></div><div class="particle" style="left: 15.7064%; top: 23.6683%; animation-delay: 0.298265s; animation-duration: 5.80559s;"></div><div class="particle" style="left: 48.1202%; top: 28.6214%; animation-delay: 4.06576s; animation-duration: 4.70318s;"></div><div class="particle" style="left: 71.7505%; top: 86.4542%; animation-delay: 1.3288s; animation-duration: 3.00403s;"></div><div class="particle" style="left: 86.527%; top: 57.2946%; animation-delay: 2.29733s; animation-duration: 4.26083s;"></div><div class="particle" style="left: 87.8382%; top: 70.9586%; animation-delay: 0.430352s; animation-duration: 3.86764s;"></div><div class="particle" style="left: 95.2385%; top: 59.1672%; animation-delay: 1.97765s; animation-duration: 5.37593s;"></div><div class="particle" style="left: 28.6781%; top: 1.09034%; animation-delay: 4.275s; animation-duration: 4.5626s;"></div><div class="particle" style="left: 88.4725%; top: 14.2811%; animation-delay: 1.09538s; animation-duration: 3.25984s;"></div><div class="particle" style="left: 98.9461%; top: 53.6857%; animation-delay: 0.435418s; animation-duration: 4.45744s;"></div><div class="particle" style="left: 69.4252%; top: 2.79617%; animation-delay: 5.715s; animation-duration: 3.65491s;"></div><div class="particle" style="left: 41.4064%; top: 42.3473%; animation-delay: 1.51438s; animation-duration: 3.23502s;"></div><div class="particle" style="left: 90.708%; top: 75.8547%; animation-delay: 1.60696s; animation-duration: 3.06735s;"></div><div class="particle" style="left: 66.6894%; top: 41.0632%; animation-delay: 5.33478s; animation-duration: 3.81069s;"></div><div class="particle" style="left: 98.558%; top: 14.7168%; animation-delay: 2.50908s; animation-duration: 5.89107s;"></div></div>
+      <div class="hero-orbs">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+      </div>
+      <div class="hero-content">
+        <h1>テクノロジーで、<br>未来のビジネスを創造する</h1>
+        <p>
+          最先端のIT技術を駆使し、企業の課題解決と成長を支援します<br>
+          クラウド、データ分析、インフラ構築を通じて<br>
+          持続可能で革新的なビジネス環境の実現をサポートします
+        </p>
+        
+        <div class="hero-cta">
+          <a href="#contact" class="cta-button primary">お問い合わせ</a>
+          <a href="#services" class="cta-button">サービス詳細</a>
+        </div>
+      </div>
+      
+      <div class="scroll-indicator"></div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <h2 class="section-title fade-in active">事業内容</h2>
+        <p class="section-subtitle fade-in active">お客様のビジネス課題に最適なソリューションを提供します</p>
+
+        <div class="service-grid">
+          <div class="service-card fade-in active">
+            <div class="service-image" style="margin-bottom: 20px;">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&amp;h=200&amp;fit=crop&amp;crop=center" alt="ITソリューション" style="width: 100%; height: 160px; object-fit: cover; border-radius: 6px;" data-height-listener-added="true">
+            </div>
+            <h3>ITソリューション事業</h3>
+            <p>
+              企業の業務効率化や課題解決のための最適なITソリューションを提供。顧客のニーズに合わせたシステム開発からクラウド活用まで幅広く対応します。
+            </p>
+          </div>
+
+          <div class="service-card fade-in active">
+            <div class="service-image" style="margin-bottom: 20px;">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&amp;h=200&amp;fit=crop&amp;crop=center" alt="コンサルティング" style="width: 100%; height: 160px; object-fit: cover; border-radius: 6px;" data-height-listener-added="true">
+            </div>
+            <h3>テクノロジーコンサルティング事業</h3>
+            <p>
+              最新のテクノロジートレンドを踏まえ、企業のDX推進や技術選定をサポート。データ分析に基づく戦略立案と効果測定により、ビジネス成長を加速します。
+            </p>
+          </div>
+
+          <div class="service-card fade-in active">
+            <div class="service-image" style="margin-bottom: 20px;">
+              <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&amp;h=200&amp;fit=crop&amp;crop=center" alt="インフラ構築" style="width: 100%; height: 160px; object-fit: cover; border-radius: 6px;" data-height-listener-added="true">
+            </div>
+            <h3>ITインフラ構築及び運用保守事業</h3>
+            <p>
+              安定的かつセキュアなITインフラの設計から構築、運用保守まで一貫したサービスを提供。クラウド環境の構築からオンプレミスシステムの管理まで対応します。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="strengths">
+      <div class="container">
+        <h2 class="section-title fade-in active">技術力と革新性</h2>
+        <p class="section-subtitle fade-in active">確かな技術力で、お客様のビジネスを支えます</p>
+        
+        <div class="strengths-image" style="text-align: center; margin-bottom: 50px;">
+          <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&amp;h=300&amp;fit=crop&amp;crop=center" alt="技術チーム" style="width: 100%; max-width: 700px; height: 250px; object-fit: cover; border-radius: 12px;" data-height-listener-added="true">
+        </div>
+
+        <div class="strengths-grid">
+          <div class="strength-item fade-in active">
+            <h3>最新のIT技術活用</h3>
+            <p>
+              クラウド、AI、ビッグデータなど最新技術を駆使したソリューションを提供。お客様のビジネス課題を最適な技術で解決し、業務効率化と価値創造を実現します。
+            </p>
+          </div>
+
+          <div class="strength-item fade-in active">
+            <h3>インフラ構築の専門性</h3>
+            <p>
+              オンプレミスからクラウドまで幅広い環境に対応。高可用性と拡張性を備えた堅牢なインフラ設計と構築で、ビジネスの安定稼働を支えます。
+            </p>
+          </div>
+
+          <div class="strength-item fade-in active">
+            <h3>セキュリティ強化・DX推進</h3>
+            <p>
+              多層防御の考え方に基づいた高度なセキュリティ対策とデジタルトランスフォーメーションの両立で、安全かつ革新的なビジネス環境を構築します。
+            </p>
+          </div>
+
+          <div class="strength-item fade-in active">
+            <h3>継続的な技術研鑽</h3>
+            <p>
+              最新技術動向の調査・研究と積極的な資格取得支援により、常に先進的なソリューション提供が可能な技術力を維持・向上させています。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision" class="vision">
+      <div class="vision-decoration"></div>
+      <div class="vision-decoration"></div>
+      <div class="vision-decoration"></div>
+      <div class="container">
+        <h2 class="section-title fade-in active">今後のビジョンと展望</h2>
+        <p class="section-subtitle fade-in active">未来を見据えた価値創造</p>
+
+        <div class="vision-grid">
+          <div class="vision-item fade-in active">
+            <h3>IT技術の進化への対応</h3>
+            <p>
+              最新のIT技術を積極的に取り入れ、顧客企業の競争力向上に貢献します。クラウド技術やAI活用を通じて、革新的なソリューションを提供します。
+            </p>
+          </div>
+
+          <div class="vision-item fade-in active">
+            <h3>顧客企業の成長支援</h3>
+            <p>
+              ビジネスプロセスの効率化と業務品質の向上を通じて、顧客企業の持続的な成長を支援します。専門的な知見と経験を活かしたコンサルティングを提供します。
+            </p>
+          </div>
+
+          <div class="vision-item fade-in active">
+            <h3>社会のデジタル化貢献</h3>
+            <p>
+              社会全体のデジタルトランスフォーメーションを推進し、効率的で持続可能な社会づくりに貢献します。多様な業界のIT課題解決を通じて社会的価値を創出します。
+            </p>
+          </div>
+
+          <div class="vision-item fade-in active">
+            <h3>持続可能な企業づくり</h3>
+            <p>
+              高い技術力と倫理観を持つ人材の育成に努め、社会から信頼される企業を目指します。長期的な視点でステークホルダーとの関係構築に取り組みます。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recruitment" class="recruitment">
+      <div class="container">
+        <h2 class="section-title fade-in active">採用情報</h2>
+        <p class="section-subtitle fade-in active">技術で未来を切り拓く仲間を募集しています</p>
+        
+        <div class="recruitment-intro fade-in active">
+          <h3>私たちと一緒に、テクノロジーで世界を変えませんか？</h3>
+          <p>
+            スノアでは、最先端技術に挑戦し、お客様のビジネス課題を解決する技術者を求めています。
+            少数精鋭のチームで、一人ひとりが大きな裁量を持ち、成長できる環境を提供します。
+            あなたの技術力と創造力で、企業の未来を創造していきましょう。
+          </p>
+        </div>
+        
+        <div class="recruitment-stats fade-in active">
+          <div class="stat-card">
+            <span class="stat-number">可</span>
+            <span class="stat-label">リモートワーク<br><small style="font-size: 11px; color: #999;">（経験者のみ）</small></span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">9:00-18:00</span>
+            <span class="stat-label">基本勤務時間<br><small style="font-size: 11px; color: #999;">（プロジェクト先に準ずる）</small></span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">全額</span>
+            <span class="stat-label">資格取得支援</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">年2回</span>
+            <span class="stat-label">昇給・賞与</span>
+          </div>
+        </div>
+
+        <!-- 経験者採用 -->
+        <h3 style="text-align: center; font-size: 32px; color: #0066ff; margin: 60px 0 20px; font-weight: 700;">経験者採用</h3>
+        <p style="text-align: center; color: #666; margin-bottom: 40px; font-size: 16px;">1年以上の実務経験をお持ちの方・即戦力として活躍いただけます</p>
+        
+        <div class="job-positions">
+          <div class="job-card fade-in active">
+            <h3 class="job-title">システムエンジニア【経験者】</h3>
+            <p class="job-summary">
+              企業向けシステムの設計・開発・運用を担当。お客様の要件を分析し、最適なソリューションを提案・実装します。
+            </p>
+            <div class="job-requirements">
+              <h4>必要スキル・経験</h4>
+              <ul>
+                <li>システム開発経験 1年以上</li>
+                <li>要件定義・設計の経験</li>
+                <li>データベース設計・操作スキル</li>
+                <li>プロジェクト管理経験（歓迎）</li>
+              </ul>
+            </div>
+            <div class="job-skills">
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Docker</span>
+            </div>
+            <div class="job-requirements">
+              <h4>給与</h4>
+              <p style="font-size: 18px; font-weight: 600; color: #0066ff; margin: 8px 0;">月給28万円以上</p>
+              <p style="font-size: 12px; color: #666;">※経験・スキルにより決定いたします</p>
+            </div>
+            <div class="work-conditions" style="margin: 20px 0; padding: 15px; background: #f8fbff; border-radius: 8px; font-size: 13px; color: #666;">
+              <strong>勤務条件：</strong>リモートワーク可 / 勤務時間：プロジェクト先に準ずる（基本9:00-18:00）
+            </div>
+            <a href="#contact" class="apply-button">応募する</a>
+          </div>
+
+          <div class="job-card fade-in active">
+            <h3 class="job-title">Web開発エンジニア【経験者】</h3>
+            <p class="job-summary">
+              モダンなWebアプリケーションの開発を担当。フロントエンドからバックエンドまで幅広く活躍できます。
+            </p>
+            <div class="job-requirements">
+              <h4>必要スキル・経験</h4>
+              <ul>
+                <li>Web開発経験 1年以上</li>
+                <li>JavaScript/TypeScriptでの開発経験</li>
+                <li>レスポンシブデザインの実装経験</li>
+                <li>API設計・開発経験</li>
+              </ul>
+            </div>
+            <div class="job-skills">
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Vue.js</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">GraphQL</span>
+            </div>
+            <div class="job-requirements">
+              <h4>給与</h4>
+              <p style="font-size: 18px; font-weight: 600; color: #0066ff; margin: 8px 0;">月給28万円以上</p>
+              <p style="font-size: 12px; color: #666;">※経験・スキルにより決定いたします</p>
+            </div>
+            <div class="work-conditions" style="margin: 20px 0; padding: 15px; background: #f8fbff; border-radius: 8px; font-size: 13px; color: #666;">
+              <strong>勤務条件：</strong>リモートワーク可 / 勤務時間：プロジェクト先に準ずる（基本9:00-18:00）
+            </div>
+            <a href="#contact" class="apply-button">応募する</a>
+          </div>
+
+          <div class="job-card fade-in active">
+            <h3 class="job-title">インフラエンジニア【経験者】</h3>
+            <p class="job-summary">
+              クラウドインフラの設計・構築・運用を担当。スケーラブルで安全なインフラ環境を構築します。
+            </p>
+            <div class="job-requirements">
+              <h4>必要スキル・経験</h4>
+              <ul>
+                <li>インフラ構築・運用経験 1年以上</li>
+                <li>クラウドサービス（AWS/Azure）の経験</li>
+                <li>コンテナ技術の理解・経験</li>
+                <li>監視・ログ管理ツールの経験</li>
+              </ul>
+            </div>
+            <div class="job-skills">
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Azure</span>
+              <span class="skill-tag">Kubernetes</span>
+              <span class="skill-tag">Terraform</span>
+              <span class="skill-tag">Ansible</span>
+            </div>
+            <div class="job-requirements">
+              <h4>給与</h4>
+              <p style="font-size: 18px; font-weight: 600; color: #0066ff; margin: 8px 0;">月給28万円以上</p>
+              <p style="font-size: 12px; color: #666;">※経験・スキルにより決定いたします</p>
+            </div>
+            <div class="work-conditions" style="margin: 20px 0; padding: 15px; background: #f8fbff; border-radius: 8px; font-size: 13px; color: #666;">
+              <strong>勤務条件：</strong>リモートワーク可 / 勤務時間：プロジェクト先に準ずる（基本9:00-18:00）
+            </div>
+            <a href="#contact" class="apply-button">応募する</a>
+          </div>
+
+          <div class="job-card fade-in active">
+            <h3 class="job-title">データサイエンティスト【経験者】</h3>
+            <p class="job-summary">
+              企業のビッグデータを分析し、ビジネス価値を創出。機械学習モデルの構築から実装まで担当します。
+            </p>
+            <div class="job-requirements">
+              <h4>必要スキル・経験</h4>
+              <ul>
+                <li>データ分析・機械学習の経験 1年以上</li>
+                <li>Python/Rでの分析経験</li>
+                <li>統計学・数学の基礎知識</li>
+                <li>ビジネス課題解決への興味</li>
+              </ul>
+            </div>
+            <div class="job-skills">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">R</span>
+              <span class="skill-tag">TensorFlow</span>
+              <span class="skill-tag">Pandas</span>
+              <span class="skill-tag">BigQuery</span>
+            </div>
+            <div class="job-requirements">
+              <h4>給与</h4>
+              <p style="font-size: 18px; font-weight: 600; color: #0066ff; margin: 8px 0;">月給28万円以上</p>
+              <p style="font-size: 12px; color: #666;">※経験・スキルにより決定いたします</p>
+            </div>
+            <div class="work-conditions" style="margin: 20px 0; padding: 15px; background: #f8fbff; border-radius: 8px; font-size: 13px; color: #666;">
+              <strong>勤務条件：</strong>リモートワーク可 / 勤務時間：プロジェクト先に準ずる（基本9:00-18:00）
+            </div>
+            <a href="#contact" class="apply-button">応募する</a>
+          </div>
+        </div>
+        
+        <!-- 未経験者採用 -->
+        <h3 style="text-align: center; font-size: 32px; color: #0066ff; margin: 80px 0 20px; font-weight: 700;">未経験者採用</h3>
+        
+        <!-- 未経験者共通要件 -->
+        <div style="background: #f0f8ff; padding: 30px; border-radius: 16px; margin-bottom: 40px; box-shadow: 0 4px 20px rgba(0, 102, 255, 0.08);">
+          <div style="text-align: center; margin-bottom: 25px;">
+            <h4 style="font-size: 20px; color: #0066ff; margin-bottom: 10px; font-weight: 700;">対象となる方</h4>
+            <p style="margin: 0 0 15px; font-weight: 600; color: #0066ff; font-size: 16px;">＜本気でITエンジニアを目指したい完全未経験歓迎＞</p>
+            <p style="margin: 0; font-size: 15px; color: #333;">意欲や積極性を重視した100％ポテンシャル採用です！</p>
+          </div>
+          
+          <div style="background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+            <h5 style="font-size: 16px; color: #333; margin-bottom: 15px; font-weight: 600;">基本条件</h5>
+            <ul style="font-size: 14px; color: #555; margin: 0; padding-left: 20px; line-height: 1.8;">
+              <li>高卒以上の方</li>
+              <li>社会人1年以上（バイト含む）</li>
+              <li>理系・文系は一切問いません</li>
+              <li>IT未経験の方は30歳未満（長期勤続によるキャリア形成のため）</li>
+            </ul>
+          </div>
+          
+          <div style="background: white; padding: 20px; border-radius: 12px;">
+            <h5 style="font-size: 16px; color: #333; margin-bottom: 15px; font-weight: 600;">こんな方を歓迎します！（一つでも当てはまればOK）</h5>
+            <ul style="font-size: 14px; color: #555; margin: 0; padding-left: 20px; line-height: 1.8;">
+              <li>積極的に学ぶ姿勢がある方</li>
+              <li>仕事で活かせる専門スキルを身に付けたい方</li>
+              <li>IT業界で活躍したいという思いがある方</li>
+              <li>ゲームやアプリ、Webサービスが好きな方</li>
+              <li>頑張りや成長を正当に評価されたい方</li>
+              <li>将来的に高収入を目指したい方</li>
+              <li>IT業界での実務経験がある方（エンジニア・運用・サポートなど職種は不問）</li>
+              <li>IT関係の有資格者（ITパスポート、基本情報、応用情報）</li>
+            </ul>
+            <p style="font-size: 13px; color: #666; margin: 15px 0 0; text-align: center; font-style: italic;">※入社後の研修で基礎から学べるため、現時点での経験や資格は一切不問です！</p>
+          </div>
+        </div>
+        
+        <div class="job-positions">
+          <div class="job-card fade-in active">
+            <h3 class="job-title">システムエンジニア【未経験歓迎】</h3>
+            <p class="job-summary">
+              IT業界未経験から始められるポジション。先輩エンジニアのサポートのもと、システム開発の基礎から学べます。
+            </p>
+            <div class="job-requirements">
+              <h4>学習支援</h4>
+              <ul>
+                <li>Java, Python,JavaScript学習サポート</li>
+                <li>ツール使用方法指導</li>
+                <li>実案件を通じた実践的学習</li>
+              </ul>
+            </div>
+
+            <div class="job-requirements">
+              <h4>給与</h4>
+              <p style="font-size: 18px; font-weight: 600; color: #0066ff; margin: 8px 0;">月給25万円以上</p>
+              <p style="font-size: 12px; color: #666;">※経験・スキル・前職給与を考慮し決定いたします</p>
+            </div>
+            <div class="work-conditions" style="margin: 20px 0; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 13px; color: #856404; border: 1px solid #ffeaa7;">
+              <strong>勤務条件：</strong>リモートワーク可（プロジェクトや研修状況により出社の場合あり） / 勤務時間：9:00-18:00
+            </div>
+            <a href="#contact" class="apply-button">応募する</a>
+          </div>
+
+          <div class="job-card fade-in active">
+            <h3 class="job-title">Web開発エンジニア【未経験歓迎】</h3>
+            <p class="job-summary">
+              Webサイト・アプリケーション開発を基礎から学べるポジション。実際のプロジェクトを通じて成長できます。
+            </p>
+            <div class="job-requirements">
+              <h4>学習支援</h4>
+              <ul>
+                <li>HTML/CSS基礎研修</li>
+                <li>JavaScript学習サポート</li>
+                <li>デザインツール使用方法指導</li>
+                <li>実案件を通じた実践的学習</li>
+              </ul>
+            </div>
+
+            <div class="job-requirements">
+              <h4>給与</h4>
+              <p style="font-size: 18px; font-weight: 600; color: #0066ff; margin: 8px 0;">月給25万円以上</p>
+              <p style="font-size: 12px; color: #666;">※経験・スキル・前職給与を考慮し決定いたします</p>
+            </div>
+            <div class="work-conditions" style="margin: 20px 0; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 13px; color: #856404; border: 1px solid #ffeaa7;">
+              <strong>勤務条件：</strong>リモートワーク可（プロジェクトや研修状況により出社の場合あり） / 勤務時間：9:00-18:00
+            </div>
+            <a href="#contact" class="apply-button">応募する</a>
+          </div>
+
+          <div class="job-card fade-in active">
+            <h3 class="job-title">インフラエンジニア【未経験歓迎】</h3>
+            <p class="job-summary">
+              サーバーやネットワークの基礎から学習。クラウド技術を中心とした現代的なインフラスキルを身につけられます。
+            </p>
+            <div class="job-requirements">
+              <h4>スキル習得支援</h4>
+              <ul>
+                <li>Linux基礎コマンド研修</li>
+                <li>AWS・Azure基礎学習</li>
+                <li>ネットワーク構築実習</li>
+                <li>監視・運用ツール操作指導</li>
+              </ul>
+            </div>
+
+            <div class="job-requirements">
+              <h4>給与</h4>
+              <p style="font-size: 18px; font-weight: 600; color: #0066ff; margin: 8px 0;">月給25万円以上</p>
+              <p style="font-size: 12px; color: #666;">※経験・スキル・前職給与を考慮し決定いたします</p>
+            </div>
+            <div class="work-conditions" style="margin: 20px 0; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 13px; color: #856404; border: 1px solid #ffeaa7;">
+              <strong>勤務条件：</strong>リモートワーク可（プロジェクトや研修状況により出社の場合あり） / 勤務時間：9:00-18:00
+            </div>
+            <a href="#contact" class="apply-button">応募する</a>
+          </div>
+
+          <div class="job-card fade-in active">
+            <h3 class="job-title">データサイエンティスト【未経験歓迎】</h3>
+            <p class="job-summary">
+              データ分析の基礎から統計学、機械学習まで段階的に学習。ビジネス課題を数値で解決するスキルを習得できます。
+            </p>
+            <div class="job-requirements">
+              <h4>データ分析学習支援</h4>
+              <ul>
+                <li>Python・R基礎研修</li>
+                <li>統計学・数学基礎学習</li>
+                <li>Excel・BIツール操作指導</li>
+                <li>機械学習・データ可視化実習</li>
+              </ul>
+            </div>
+
+            <div class="job-requirements">
+              <h4>給与</h4>
+              <p style="font-size: 18px; font-weight: 600; color: #0066ff; margin: 8px 0;">月給25万円以上</p>
+              <p style="font-size: 12px; color: #666;">※経験・スキル・前職給与を考慮し決定いたします</p>
+            </div>
+            <div class="work-conditions" style="margin: 20px 0; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 13px; color: #856404; border: 1px solid #ffeaa7;">
+              <strong>勤務条件：</strong>リモートワーク可（プロジェクトや研修状況により出社の場合あり） / 勤務時間：9:00-18:00
+            </div>
+            <a href="#contact" class="apply-button">応募する</a>
+          </div>
+        </div>
+
+        <!-- 研修制度 -->
+        <div style="background: linear-gradient(135deg, #f8fbff 0%, #e8f2ff 100%); padding: 50px; border-radius: 20px; margin: 60px 0; box-shadow: 0 10px 40px rgba(0, 102, 255, 0.08); border: 1px solid rgba(0, 102, 255, 0.1);">
+          <h3 style="text-align: center; font-size: 28px; color: #0066ff; margin-bottom: 30px; font-weight: 700;">研修制度</h3>
+          
+          <div style="background: white; padding: 35px; border-radius: 16px; box-shadow: 0 8px 30px rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.08);">
+            <div style="text-align: center; margin-bottom: 25px;">
+              <h4 style="font-size: 20px; color: #0066ff; margin-bottom: 8px; font-weight: 600;">研修（未経験者は3ヶ月）</h4>
+              <div style="width: 60px; height: 3px; background: linear-gradient(90deg, #0066ff, #007bff); margin: 0 auto 20px; border-radius: 2px;"></div>
+            </div>
+            
+            <div style="background: #f8fbff; padding: 25px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #0066ff;">
+              <h5 style="font-size: 16px; color: #333; margin-bottom: 15px; font-weight: 600; display: flex; align-items: center;">
+                <span style="font-size: 20px; margin-right: 10px;">📚</span>
+                学習内容
+              </h5>
+              <div style="font-size: 14px; color: #555; line-height: 1.8;">
+                <p style="margin: 0 0 12px;"><strong>ITの基礎知識</strong>：IT業界の動向、エンジニアの種類など</p>
+                <p style="margin: 0 0 12px;"><strong>ビジネスマナー</strong>：社会人としての基本的なマナーとコミュニケーション</p>
+                <p style="margin: 0 0 12px;"><strong>プログラミング言語</strong>：Java, Python, HTML/CSS, JavaScriptなど</p>
+                <p style="margin: 0;"><strong>インフラ基礎</strong>：AWS, CCNA, LPICなどの基礎を学びます</p>
+              </div>
+            </div>
+            
+            <div style="background: #e8f5e8; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #c3e6c3;">
+              <p style="margin: 0; color: #2d5016; font-weight: 500; font-size: 15px;">
+                <span style="font-size: 18px; margin-right: 8px;">👨‍🏫</span>
+                専任講師が丁寧に指導するので、PCスキルに自信がない方でも安心です
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- チーム配属・フォロー体制 -->
+        <div style="background: linear-gradient(135deg, #e8f5e8 0%, #f0f9f0 100%); padding: 50px; border-radius: 20px; margin: 60px 0; box-shadow: 0 10px 40px rgba(46, 125, 50, 0.08); border: 1px solid rgba(76, 175, 80, 0.15);">
+          <h3 style="text-align: center; font-size: 28px; color: #2e7d32; margin-bottom: 30px; font-weight: 700;">安心のチーム配属＆手厚いフォロー体制</h3>
+          
+          <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 8px 30px rgba(46, 125, 50, 0.06); border: 1px solid rgba(76, 175, 80, 0.1);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 25px;">
+              
+              <div style="background: #f8fbff; padding: 25px; border-radius: 12px; border-left: 4px solid #2e7d32;">
+                <h5 style="font-size: 16px; color: #333; margin-bottom: 15px; font-weight: 600; display: flex; align-items: center;">
+                  <span style="font-size: 20px; margin-right: 10px;">👥</span>
+                  先輩がいるチームに配属
+                </h5>
+                <p style="font-size: 14px; color: #555; line-height: 1.8; margin: 0;">
+                  研修後は、必ず先輩がいるチームに配属されます。最初は簡単な業務からお任せするので、実践を通して着実にスキルアップできます！
+                </p>
+              </div>
+              
+              <div style="background: #f8fbff; padding: 25px; border-radius: 12px; border-left: 4px solid #2e7d32;">
+                <h5 style="font-size: 16px; color: #333; margin-bottom: 15px; font-weight: 600; display: flex; align-items: center;">
+                  <span style="font-size: 20px; margin-right: 10px;">🤝</span>
+                  何でも聞ける環境
+                </h5>
+                <p style="font-size: 14px; color: #555; line-height: 1.8; margin: 0;">
+                  面倒見の良い先輩ばかりなので、分からないことは何でもすぐに聞ける環境です。技術的な質問から業務の進め方まで、丁寧にサポートします。
+                </p>
+              </div>
+              
+            </div>
+            
+            <div style="background: #e8f5e8; padding: 25px; border-radius: 12px; text-align: center; border: 1px solid #c8e6c9;">
+              <h5 style="font-size: 18px; color: #2e7d32; margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 24px; margin-right: 10px;">🎯</span>
+                メンターメンティ制度
+              </h5>
+              <p style="margin: 0; color: #2d5016; font-weight: 500; font-size: 15px; line-height: 1.7;">
+                専任の先輩が<strong>1年間マンツーマン</strong>でフォローする「メンターメンティ制度」があります。<br>
+                技術スキルからキャリア相談まで、安心して成長できる環境を提供します。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="benefits-section fade-in active">
+          <h3 style="text-align: center; font-size: 28px; color: #0066ff; margin-bottom: 40px;">働く環境・福利厚生</h3>
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <span class="benefit-icon">🏠</span>
+              <h4>リモートワーク対応</h4>
+              <p>経験者はリモートワーク可能。未経験者は研修・育成期間を経てリモートワーク検討。</p>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">⏰</span>
+              <h4>勤務時間</h4>
+              <p>基本9:00-18:00。プロジェクト先がある場合は、プロジェクト先の勤務時間に準じます。</p>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">📚</span>
+              <h4>学習支援制度</h4>
+              <p>技術書籍・オンライン学習・資格取得費用を全額会社負担。成長をサポートします。</p>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">💰</span>
+              <h4>競争力のある給与</h4>
+              <p>経験・スキルに応じた適正な給与設定。年2回の昇給・賞与チャンスがあります。</p>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">🛠️</span>
+              <h4>最新設備</h4>
+              <p>MacBook Pro、4Kモニター等、生産性を高める最新の開発環境を提供します。</p>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">🎯</span>
+              <h4>裁量権</h4>
+              <p>少数精鋭のため、一人ひとりが大きな裁量を持ち、主体的に業務に取り組めます。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="company" class="company-info">
+      <div class="container">
+        <h2 class="section-title fade-in active">会社情報</h2>
+        <p class="section-subtitle fade-in active">Company Information</p>
+        
+        <div class="company-image" style="text-align: center; margin-bottom: 50px;">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&amp;h=300&amp;fit=crop&amp;crop=center" alt="オフィス風景" style="width: 100%; max-width: 700px; height: 250px; object-fit: cover; border-radius: 12px;" data-height-listener-added="true">
+        </div>
+
+        <div class="info-table">
+          <div class="info-row">
+            <div class="info-label">会社名</div>
+            <div class="info-value">株式会社スノア / Sunoar Inc.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">代表者</div>
+            <div class="info-value">徳重 裕太</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">設立</div>
+            <div class="info-value">令和7年8月19日</div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">従業員数</div>
+            <div class="info-value">5名</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">事業形態</div>
+            <div class="info-value">株式会社</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">所在地</div>
+            <div class="info-value">東京都千代田区神田淡路町二丁目1番地-401号</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title fade-in active">お問い合わせ</h2>
+        <p class="section-subtitle fade-in active">ご相談・お見積りは無料です。お気軽にお問い合わせください</p>
+
+        <div class="contact-info">
+          <h3>メールでのお問い合わせ</h3>
+          <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9eedfff7e7f1deedebf0f1ffecb0fdf1b0f4ee">[email&#160;protected]</a></p><p>営業時間: 平日 9:00-18:00</p>
+
+          <h3>お電話でのお問い合わせ</h3>
+          <p>03-6285-0822</p><p>受付時間: 平日 9:00-17:00</p>
+
+          <h3>オフィス所在地</h3>
+          <p>〒101-0063<br>東京都千代田区神田淡路町二丁目1番地-401号</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">Sunoar</div>
+        <div class="footer-info">
+          株式会社スノア<br>
+          東京都千代田区神田淡路町二丁目1番地-401号<br>
+          テクノロジーで、未来のビジネスを創造する
+        </div>
+        <div class="footer-bottom">© 2025 Sunoar Inc. All rights reserved.</div>
+      </div>
+    </footer>
+  
+
+<chatgpt-sidebar data-gpts-theme="light"></chatgpt-sidebar><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>
